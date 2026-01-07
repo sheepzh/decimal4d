@@ -1,6 +1,6 @@
 name: decimal4d
 description: A decimal library for Dart, which is full tested and supports infinite repeating decimals.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/sheepzh/decimal4d
 repository: https://github.com/sheepzh/decimal4d
 issue_tracker: https://github.com/sheepzh/decimal4d/issues
