@@ -54,8 +54,9 @@ void main() {
     test("+-*/", () {
       var tmp = Decimal.fromInt(10) / Decimal.fromInt(4);
       expect(tmp.toString(), "2.5");
-      tmp += Decimal.fromInt(10);
-      expect(tmp.toString(), "12.5");
+      tmp += Decimal.fromInt(5);
+      tmp += Decimal.parse("5.00");
+      expect(tmp.toString(), "12.50");
       tmp /= Decimal.fromInt(3);
       expect(tmp.toString(), "25/6");
       tmp = -tmp;
@@ -104,6 +105,14 @@ void main() {
         pos.withScale(20, RoundingMode.unnecessary).toString(),
         "0.12345000000000000000",
       );
+    });
+
+    test("stripTrailingZeros", () {
+      expect(Decimal.parse("2.5000").stripTrailingZeros().toString(), "2.5");
+      expect(Decimal.parse("0.2000").stripTrailingZeros().toString(), "0.2");
+      expect(Decimal.parse("0.000").stripTrailingZeros().toString(), "0");
+      expect(Decimal.intFraction(1, 3).stripTrailingZeros().toString(), "1/3");
+      expect(Decimal.parse("3.000").stripTrailingZeros().toString(), "3");
     });
   });
 }

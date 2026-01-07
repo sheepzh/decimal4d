@@ -420,6 +420,35 @@ class Decimal implements Comparable<Decimal> {
     if (other is Rational) return false;
     return _value == other._value && _scale == other._scale;
   }
+
+  /// Strip trailing zeros from decimal representation
+  ///
+  /// Examples:
+  /// + Decimal.parse("2.5000").stripTrailingZeros() -> "2.5"
+  /// + Decimal.parse("0.2000").stripTrailingZeros() -> "0.2"
+  /// + Decimal.parse("3.000").stripTrailingZeros() -> "3"
+  Decimal stripTrailingZeros() {
+    // Special case for zero
+    if (_value == BigInt.zero) {
+      return Decimal.zero;
+    }
+
+    var valueStr = _value.abs().toString();
+    var trailingZeros = 0;
+    for (var i = valueStr.length - 1; i >= 0 && valueStr[i] == '0'; i--) {
+      trailingZeros++;
+    }
+    // Only strip trailing zeros from the fractional part (up to _scale)
+    trailingZeros = math.min(trailingZeros, _scale);
+
+    if (trailingZeros > 0) {
+      final newScale = _scale - trailingZeros;
+      final factor = pow10(trailingZeros);
+      final newValue = _value ~/ factor;
+      return Decimal(newValue, newScale);
+    }
+    return this;
+  }
 }
 
 /// Extension to convert double to Decimal
