@@ -42,7 +42,7 @@ void main() {
   var c = Decimal.intFraction(10, 20);      // 0.5
   var d = 0.123.toDecimal();                // 0.123
   // Create rationals
-  var e = Decimal.intFraction(1, 3);        // 1/3
+  var e = Rational.intFraction(1, 3);       // 1/3
   var f = Rational.intFraction(1, 2);       // 1/2,  Not decimal 0.5
 
   // Arithmetic operations
