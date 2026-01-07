@@ -10,6 +10,16 @@ class Rational extends Decimal {
     return Rational.fraction(BigInt.from(numerator), BigInt.from(denominator));
   }
 
+  factory Rational.parse(String value) {
+    final parts = value.split('/');
+    if (parts.length != 2) {
+      throw FormatException('Invalid rational format: $value');
+    }
+    final numerator = BigInt.parse(parts[0].trim());
+    final denominator = BigInt.parse(parts[1].trim());
+    return Rational.fraction(numerator, denominator);
+  }
+
   factory Rational.fraction(BigInt numerator, BigInt denominator,
       {bool reduce = true}) {
     if (!reduce) {

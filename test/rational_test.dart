@@ -11,6 +11,9 @@ void main() {
       expect(Rational.intFraction(1, -3).toString(), "-1/3");
       expect(Rational.intFraction(-1, -3).toString(), "1/3");
       expect(Rational.intFraction(10, 20).toString(), "1/2");
+
+      expect(Rational.parse("-1/3").toString(), "-1/3");
+      expect(Rational.parse("  4  /  -8  ").toString(), "-1/2");
     });
 
     test("+-*/", () {

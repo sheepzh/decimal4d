@@ -154,6 +154,7 @@ class Decimal implements Comparable<Decimal> {
   }
 
   /// Parse from string
+  ///
   /// Examples:
   /// + "2" -> 2
   /// + "0.2" -> 0.2
@@ -163,10 +164,14 @@ class Decimal implements Comparable<Decimal> {
   /// + "1." -> 1
   /// + "-0." -> 0
   /// + "+.230" -> 0.230
+  /// + "1/3" -> Rational(1, 3)
   factory Decimal.parse(String value) {
     value = value.trim();
     if (value.isEmpty) {
       throw FormatException('Empty string cannot be parsed as Decimal');
+    }
+    if (value.contains("/")) {
+      return Rational.parse(value);
     }
 
     final isNegative = value.startsWith('-');

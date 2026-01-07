@@ -19,6 +19,9 @@ void main() {
       expect(Decimal.intFraction(1, 3).toString(), "1/3");
       expect(Decimal.intFraction(1, 2).toString(), "0.5");
 
+      expect(Decimal.parse("-1/3").toString(), "-1/3");
+      expect(Decimal.parse("  4  /  -8  ").toString(), "-1/2");
+
       // From double
       expect(0.234.toDecimal().toString(), "0.234");
       expect(0.234000.toDecimal().toString(), "0.234");
